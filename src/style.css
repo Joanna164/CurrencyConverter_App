@@ -10,7 +10,9 @@ body {
   align-items: center;
   height: 100vh;
   font-family: "Montserrat", sans-serif;
-  background-color: rgb(56, 182, 140);
+  /* background-color: rgb(56, 182, 140); */
+  background-image: url("https://media.istockphoto.com/photos/closeup-rolled-of-variety-banknote-and-multi-currency-around-the-picture-id1260186405?s=612x612");
+  background-color: transparent;
 }
 
 .wrapper {
@@ -36,7 +38,7 @@ body {
 .wrapper p {
   margin-bottom: 50px;
   font-size: 26px;
-  font-weight: 200;
+  font-weight: 80;
 }
 
 .app-body {
@@ -99,7 +101,41 @@ body {
   background-image: linear-gradient(45deg, rgb(180, 8, 3), #d36600);
 }
 
+:root {
+  --clr-body-bg: #09162e;
+  --clr-loader-bg: #b0d2e2;
+}
+
+.loader {
+  padding: 30px;
+  border: 10px solid var(--clr-loader-bg);
+  box-shadow: 0 0 5px 1px var(--clr-loader-bg);
+  border-right-color: var(--clr-body-bg);
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .wrapper .rate-info {
   margin-top: 30px;
   margin-bottom: 0;
+}
+
+.result {
+  font-size: 36px;
+  padding: 20px 20px;
+  letter-spacing: 5px;
+}
+
+.info {
+  font-weight: bolder;
+  letter-spacing: 4px;
 }
