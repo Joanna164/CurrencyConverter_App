@@ -19,7 +19,7 @@ const calculateCur = (event) => {
   addLoader();
   setTimeout(() => {
     axios
-      .get(`http://api.nbp.pl/api/exchangerates/rates/A/${currency.value}/`)
+      .get(`https://api.nbp.pl/api/exchangerates/rates/A/${currency.value}/`)
       .then((res) => {
         calculate(res.data.rates[0].mid);
       })
