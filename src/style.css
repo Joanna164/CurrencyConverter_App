@@ -58,9 +58,13 @@ body {
   margin-bottom: 10px;
   width: 100%;
   font-size: 60px;
+  color: #fff;
+  background: #596879;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
 }
 
-.app-body input,
 .app-body select {
   color: #fff;
   border: none;
@@ -96,7 +100,7 @@ body {
   cursor: pointer;
 }
 
-.swap:focus {
+.swap:hover {
   outline: none;
   background-image: linear-gradient(45deg, rgb(180, 8, 3), #d36600);
 }

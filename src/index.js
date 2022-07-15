@@ -2,34 +2,48 @@ const amount = document.querySelector(".amount"); //input
 const currency = document.querySelector("#currency"); //selector
 const swapBtn = document.querySelector(".swap");
 const appBody = document.querySelector(".app-body");
-// const loader = document.querySelector(".show-loader");
 const rateInfo = document.querySelector(".rate-info");
 
 const addLoader = () => {
-  setTimeout(() => {
-    const loader = `<div class="loader"></div>`;
-    appBody.insertAdjacentHTML("beforeend", loader);
-  }, 1000);
+  const loader = `<div id ='show' class="loader"></div>`;
+  appBody.insertAdjacentHTML("beforeend", loader);
 };
 
-// const loaderTimeout = setTimeout(addLoader, 1000);
+const removeLoader = () => {
+  const removeLoad = document.getElementById("show");
+  appBody.removeChild(removeLoad);
+};
 
 const calculateCur = (event) => {
   event.preventDefault();
-  axios
-    .get(`http://api.nbp.pl/api/exchangerates/rates/A/${currency.value}/`)
-    .then((res) => {
-      calculate(res.data.rates[0].mid);
-    })
-    .catch((errors) => {
-      console.error(errors);
-    });
+  addLoader();
+  setTimeout(() => {
+    axios
+      .get(`http://api.nbp.pl/api/exchangerates/rates/A/${currency.value}/`)
+      .then((res) => {
+        calculate(res.data.rates[0].mid);
+      })
+      .catch((errors) => {
+        removeLoader();
+        console.error(errors);
+      });
+  }, 200);
+};
+
+const enterKeyCheck = (event) => {
+  if (event.key === "Enter") {
+    calculateCur(event);
+  }
 };
 
 const calculate = (responses) => {
+  removeLoader();
   if (amount.value == "") {
-    alert("Wpisz kwotę");
+    alert("Wpisz poprawną kwotę");
+  } else if (amount.value < 1) {
+    alert("Wpisz poprawną kwotę");
   } else {
+    rateInfo.innerHTML = "";
     const result = amount.value * responses;
     const viewResult = `<h3 class="result">${amount.value} ${
       currency.value
@@ -40,8 +54,5 @@ const calculate = (responses) => {
   }
 };
 
-// amount.addEventListener("input", calculateCur);
-// currency.addEventListener("change", calculateCur);
-swapBtn.addEventListener("click", addLoader);
-clearTimeout(addLoader);
 swapBtn.addEventListener("click", (event) => calculateCur(event));
+amount.addEventListener("keyup", (event) => enterKeyCheck(event));
